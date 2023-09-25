@@ -29,7 +29,7 @@ const Shop = () => {
             <div className='bg-[#FF99004D] h-screen sticky top-14'>
                 <h1 className='text-center font-bold text-2xl tracking-[4px] underline underline-offset-4'>Order Summary</h1>
                 <div className='ml-6 mt-10'>
-                    <p>Selected Item: {cart.length}</p>
+                    <p>Selected Items: {cart.length}</p>
                 </div>
             </div>
         </div>
