@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import Cart from './Cart';
+import { addToDb } from '../utilities/fakeDb';
 
 const Shop = () => {
+    const url=`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`;
     const [products, setProducts] = useState([]);
     const [cart, setCart]= useState([]);
     // console.log(cart);
     useEffect(()=>{
-        const url=`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`;
         fetch(url)
         .then(res=>res.json())
         .then(data=>setProducts(data))
     }, []);
+
     const handleAddToCart=(product)=>{
         const newCart =[...cart, product];
         setCart(newCart);
-        // console.log(product);
+        addToDb(product.id);
     }
     return (
         <div className='grid md:grid-cols-4 relative'>
