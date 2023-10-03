@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import Cart from './Cart';
-import { addToDb } from '../utilities/fakeDb';
+import { addToDb, getShoppingCart } from '../utilities/fakeDb';
 
 const Shop = () => {
     const url=`https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json`;
@@ -19,6 +19,21 @@ const Shop = () => {
         setCart(newCart);
         addToDb(product.id);
     }
+    useEffect(()=>{
+        const storedCart = getShoppingCart();
+        const savedCart=[];
+        for(const id in storedCart){
+            const addedProduct = products.find(product=>product.id === id)
+           if(addedProduct){
+            const quantity = storedCart[id];
+            addedProduct.quantity = quantity;
+            savedCart.push(addedProduct);
+           }
+        }
+        setCart(savedCart);
+
+    }, [products])
+
     return (
         <div className='grid md:grid-cols-4 relative'>
             <div className='md:col-span-3 text-center mt-8  '>
